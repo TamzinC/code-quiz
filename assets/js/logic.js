@@ -3,6 +3,7 @@ var startScreen = document.querySelector('#start-screen');
 var questionsScreen = document.querySelector('#questions');
 var questionTitle = document.querySelector('#question-title');
 var choices = document.querySelector('#choices');
+var feedback = document.querySelector('#feedback');
 var timer = document.querySelector('#time');
 var endScreen = document.querySelector('#end-screen');
 
@@ -13,18 +14,24 @@ var currentQuestionIndex = 0;
 
 
 function displayQuestion() {
-    
+
     var currentQuestion = questions[currentQuestionIndex];
     questionTitle.innerText = currentQuestion.title;
-    var isCorrect 
+    
     // choices.innerHTML = '';
-    
+
     for (let choiceIndex = 0; choiceIndex < currentQuestion.choices.length; choiceIndex++) {
-    
+
         var choicesButton = document.createElement('button');
         choicesButton.innerText = currentQuestion.choices[choiceIndex];
         choicesButton.addEventListener('click', function () {
-            isCorrect = currentQuestion.answer === choiceIndex;
+            var isCorrect = currentQuestion.answer === currentQuestion.choices[choiceIndex];
+
+            if (isCorrect) {
+                feedback.innerText = 'Correct!'
+            } else {
+                feedback.innerText = 'Wrong answer!'
+            }
 
             console.log(currentQuestion.answer === currentQuestion.choices[choiceIndex])
         })
@@ -39,7 +46,7 @@ function startTime() {
     var timeLeft = 60;
     intervalHandle = setInterval(function () {
         timeLeft--;
-        
+
         if (timeLeft <= 0) {
             timer.innerText = '';
             clearInterval(intervalHandle);
@@ -55,6 +62,7 @@ function startTime() {
 start.addEventListener('click', function () {
     startScreen.classList.add('hide');
     questionsScreen.classList.remove('hide');
+    feedback.classList.remove('hide');
     displayQuestion();
 
     console.log("hi");
