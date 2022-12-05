@@ -28,10 +28,10 @@ function displayQuestion() {
         choicesButton.innerText = choice;
         choicesButton.addEventListener('click', function () {
 
-            var isCorrect = currentQuestion.answer === choice;
+            
             console.log(currentQuestion.answer === choice);
 
-            if (isCorrect) {
+            if (currentQuestion.answer === choice) {
 
                 feedback.innerText = 'Correct!';
                 function playCorrectAudio() {
