@@ -14,10 +14,11 @@ var currentQuestionIndex = 0;
 
 
 function displayQuestion() {
+    console.log(currentQuestionIndex,"Index")
 
     var currentQuestion = questions[currentQuestionIndex];
     questionTitle.innerText = currentQuestion.title;
-    
+
     choices.innerHTML = '';
 
     for (let choiceIndex = 0; choiceIndex < currentQuestion.choices.length; choiceIndex++) {
@@ -25,34 +26,44 @@ function displayQuestion() {
         var choicesButton = document.createElement('button');
         choicesButton.innerText = currentQuestion.choices[choiceIndex];
         choicesButton.addEventListener('click', function () {
+
             var isCorrect = currentQuestion.answer === currentQuestion.choices[choiceIndex];
+            console.log(currentQuestion.answer === currentQuestion.choices[choiceIndex]);
 
             if (isCorrect) {
+
                 feedback.innerText = 'Correct!';
-                function playCorrectAudio () {
+                function playCorrectAudio() {
                     var correct = new Audio('./assets/sfx/correct.wav');
                     correct.play();
                 }
                 playCorrectAudio();
+
             } else {
+
                 feedback.innerText = 'Wrong answer!';
-                function playIncorrectAudio () {
+                function playIncorrectAudio() {
                     var incorrect = new Audio('./assets/sfx/incorrect.wav');
                     incorrect.play();
                 }
                 playIncorrectAudio();
             }
+            
             currentQuestionIndex++;
             displayQuestion();
-            console.log(currentQuestion.answer === currentQuestion.choices[choiceIndex])
         })
         choices.append(choicesButton);
-
-        // NEED TO LOOK AT IF STATEMENT FOR TRIGGERING END SCREEN ONCE AT END OF Q's
-        // if (currentQuestionIndex.length) {
-        //     endScreen.classList.remove('hide');
-        // }
+        
     }
+    
+    if (currentQuestionIndex > questions.length ) {
+        
+        console.log("end screen")
+        questionsScreen.classList.add('hide');
+        endScreen.classList.remove('hide');
+        
+    }
+
 }
 
 
@@ -76,11 +87,13 @@ function startTime() {
 
 start.addEventListener('click', function () {
     startScreen.classList.add('hide');
+    endScreen.classList.add('hide')
     questionsScreen.classList.remove('hide');
     feedback.classList.remove('hide');
     displayQuestion();
+    startTime();
 
-    console.log("hi");
+    console.log("timer");
 })
 
 
