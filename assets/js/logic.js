@@ -29,11 +29,18 @@ function displayQuestion() {
 
             if (isCorrect) {
                 feedback.innerText = 'Correct!';
-                // // document.createElement(
-                // //     // <audio src='./assets/sfx/correct.wav'></audio>
-                // )
+                function playCorrectAudio () {
+                    var correct = new Audio('./assets/sfx/correct.wav');
+                    correct.play();
+                }
+                playCorrectAudio();
             } else {
-                feedback.innerText = 'Wrong answer!'
+                feedback.innerText = 'Wrong answer!';
+                function playIncorrectAudio () {
+                    var incorrect = new Audio('./assets/sfx/incorrect.wav');
+                    incorrect.play();
+                }
+                playIncorrectAudio();
             }
             currentQuestionIndex++;
             displayQuestion();
