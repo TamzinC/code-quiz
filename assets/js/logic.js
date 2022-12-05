@@ -17,11 +17,11 @@ function displayQuestion() {
     console.log(currentQuestionIndex,"Index")
 
     var currentQuestion = questions[currentQuestionIndex];
+    console.log(currentQuestion);
     questionTitle.innerText = currentQuestion.title;
 
     choices.innerHTML = '';
 
-    for (let choiceIndex = 0; choiceIndex < currentQuestion.choices.length; choiceIndex++) {
 
         var choicesButton = document.createElement('button');
         choicesButton.innerText = currentQuestion.choices[choiceIndex];
@@ -49,14 +49,17 @@ function displayQuestion() {
                 playIncorrectAudio();
             }
             
-            currentQuestionIndex++;
-            displayQuestion();
         })
         choices.append(choicesButton);
         
-    }
     
-    if (currentQuestionIndex > questions.length ) {
+    currentQuestionIndex++;
+    displayQuestion();
+    
+    console.log(currentQuestionIndex);
+    console.log(questions.length);
+    
+    if (currentQuestionIndex = questions.length ) {
         
         console.log("end screen")
         questionsScreen.classList.add('hide');
