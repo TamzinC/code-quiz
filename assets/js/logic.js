@@ -18,7 +18,7 @@ function displayQuestion() {
     var currentQuestion = questions[currentQuestionIndex];
     questionTitle.innerText = currentQuestion.title;
     
-    // choices.innerHTML = '';
+    choices.innerHTML = '';
 
     for (let choiceIndex = 0; choiceIndex < currentQuestion.choices.length; choiceIndex++) {
 
@@ -28,15 +28,23 @@ function displayQuestion() {
             var isCorrect = currentQuestion.answer === currentQuestion.choices[choiceIndex];
 
             if (isCorrect) {
-                feedback.innerText = 'Correct!'
+                feedback.innerText = 'Correct!';
+                // // document.createElement(
+                // //     // <audio src='./assets/sfx/correct.wav'></audio>
+                // )
             } else {
                 feedback.innerText = 'Wrong answer!'
             }
-
+            currentQuestionIndex++;
+            displayQuestion();
             console.log(currentQuestion.answer === currentQuestion.choices[choiceIndex])
         })
         choices.append(choicesButton);
 
+        // NEED TO LOOK AT IF STATEMENT FOR TRIGGERING END SCREEN ONCE AT END OF Q's
+        // if (currentQuestionIndex.length) {
+        //     endScreen.classList.remove('hide');
+        // }
     }
 }
 
