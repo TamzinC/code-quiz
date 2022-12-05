@@ -22,13 +22,14 @@ function displayQuestion() {
 
     choices.innerHTML = '';
 
-
+    currentQuestion.choices.forEach(function(choice) {
         var choicesButton = document.createElement('button');
-        choicesButton.innerText = currentQuestion.choices[choiceIndex];
+        console.log(choice);
+        choicesButton.innerText = choice;
         choicesButton.addEventListener('click', function () {
 
-            var isCorrect = currentQuestion.answer === currentQuestion.choices[choiceIndex];
-            console.log(currentQuestion.answer === currentQuestion.choices[choiceIndex]);
+            var isCorrect = currentQuestion.answer === choice;
+            console.log(currentQuestion.answer === choice);
 
             if (isCorrect) {
 
@@ -49,17 +50,18 @@ function displayQuestion() {
                 playIncorrectAudio();
             }
             
+            currentQuestionIndex++;
+            displayQuestion();
         })
         choices.append(choicesButton);
+    })
+
         
-    
-    currentQuestionIndex++;
-    displayQuestion();
     
     console.log(currentQuestionIndex);
     console.log(questions.length);
     
-    if (currentQuestionIndex = questions.length ) {
+    if (currentQuestionIndex = 5 ) {
         
         console.log("end screen")
         questionsScreen.classList.add('hide');
