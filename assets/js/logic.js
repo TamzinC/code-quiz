@@ -14,6 +14,13 @@ var currentQuestionIndex = 0;
 
 
 function displayQuestion() {
+    if (currentQuestionIndex === 5 ) {
+        
+        console.log("end screen")
+        questionsScreen.classList.add('hide');
+        endScreen.classList.remove('hide');
+        return
+    }
     console.log(currentQuestionIndex,"Index")
 
     var currentQuestion = questions[currentQuestionIndex];
@@ -55,20 +62,6 @@ function displayQuestion() {
         })
         choices.append(choicesButton);
     })
-
-        
-    
-    console.log(currentQuestionIndex);
-    console.log(questions.length);
-    
-    if (currentQuestionIndex = 5 ) {
-        
-        console.log("end screen")
-        questionsScreen.classList.add('hide');
-        endScreen.classList.remove('hide');
-        
-    }
-
 }
 
 
