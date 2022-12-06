@@ -14,14 +14,14 @@ var currentQuestionIndex = 0;
 
 
 function displayQuestion() {
-    if (currentQuestionIndex === 5 ) {
-        
+    if (currentQuestionIndex === 5) {
+
         console.log("end screen")
         questionsScreen.classList.add('hide');
         endScreen.classList.remove('hide');
         return
     }
-    console.log(currentQuestionIndex,"Index")
+    console.log(currentQuestionIndex, "Index")
 
     var currentQuestion = questions[currentQuestionIndex];
     console.log(currentQuestion);
@@ -29,13 +29,13 @@ function displayQuestion() {
 
     choices.innerHTML = '';
 
-    currentQuestion.choices.forEach(function(choice) {
+    currentQuestion.choices.forEach(function (choice) {
         var choicesButton = document.createElement('button');
         console.log(choice);
         choicesButton.innerText = choice;
         choicesButton.addEventListener('click', function () {
 
-            
+
             console.log(currentQuestion.answer === choice);
 
             if (currentQuestion.answer === choice) {
@@ -56,7 +56,7 @@ function displayQuestion() {
                 }
                 playIncorrectAudio();
             }
-            
+
             currentQuestionIndex++;
             displayQuestion();
         })
@@ -67,20 +67,39 @@ function displayQuestion() {
 
 
 function startTime() {
-    var timeLeft = 60;
-    intervalHandle = setInterval(function () {
-        timeLeft--;
+    var timerID;
 
-        if (timeLeft <= 0) {
-            timer.innerText = '';
-            clearInterval(intervalHandle);
+    timerID = setInterval(clockTick, 1000);
 
-        }
+    // var timeLeft = 60;
+    // intervalHandle = setInterval(function () {
+    //     timeLeft--;
 
-        console.log('time');
-    }, 1000);
+    //     if (timeLeft <= 0) {
+    //         timer.innerText = 0;
+    //         clearInterval(intervalHandle);
+
+    //     }
+
+    //     console.log('time');
+    // }, 1000);
 }
 
+
+function clockTick() {
+    var time = 60;
+
+    time--;
+    timer.textContent = time
+
+    if (time <= 0) {
+        function quizEnd() {
+
+        }
+        clearInterval(intervalHandle);
+    }
+
+}
 
 
 start.addEventListener('click', function () {
@@ -90,6 +109,7 @@ start.addEventListener('click', function () {
     feedback.classList.remove('hide');
     displayQuestion();
     startTime();
+    clockTick();
 
     console.log("timer");
 })
