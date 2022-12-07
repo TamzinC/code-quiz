@@ -7,9 +7,11 @@ var feedback = document.querySelector('#feedback');
 var timer = document.querySelector('#time');
 var endScreen = document.querySelector('#end-screen');
 
+
 var intervalHandle
 var currentQuestionIndex = 0;
-
+var time = 60;
+var timerId;
 
 
 
@@ -53,6 +55,7 @@ function displayQuestion() {
                 function playIncorrectAudio() {
                     var incorrect = new Audio('./assets/sfx/incorrect.wav');
                     incorrect.play();
+                    timer.textContent = time - 10;
                 }
                 playIncorrectAudio();
             }
@@ -66,39 +69,17 @@ function displayQuestion() {
 
 
 
-function startTime() {
-    var timerID;
-
-    timerID = setInterval(clockTick, 1000);
-
-    // var timeLeft = 60;
-    // intervalHandle = setInterval(function () {
-    //     timeLeft--;
-
-    //     if (timeLeft <= 0) {
-    //         timer.innerText = 0;
-    //         clearInterval(intervalHandle);
-
-    //     }
-
-    //     console.log('time');
-    // }, 1000);
-}
-
-
 function clockTick() {
-    var time = 60;
-
     time--;
+    console.log(time)
     timer.textContent = time
 
-    if (time <= 0) {
-        function quizEnd() {
-
-        }
-        clearInterval(intervalHandle);
+    if (time <= 0) { //timer stopping at 1 and not 0??!
+        quizEnd() 
     }
+    clearInterval(time);
 
+    finalScore.innerText = time; //need to save the remaining time as the final score
 }
 
 
@@ -108,7 +89,7 @@ start.addEventListener('click', function () {
     questionsScreen.classList.remove('hide');
     feedback.classList.remove('hide');
     displayQuestion();
-    startTime();
+    timerId = setInterval(clockTick, 1000);
     clockTick();
 
     console.log("timer");
