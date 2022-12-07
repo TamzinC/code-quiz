@@ -74,13 +74,23 @@ function clockTick() {
     console.log(time)
     timer.textContent = time
 
-    if (time <= 0) { //timer stopping at 1 and not 0??!
+    if (time === 0) { //timer stopping at 1 and not 0??!
         quizEnd() 
-    }
-    clearInterval(time);
 
-    finalScore.innerText = time; //need to save the remaining time as the final score
-}
+        clearInterval(timerId);
+    }
+};
+
+
+function quizEnd () {
+    questionsScreen.classList.add('hide');
+    endScreen.classList.remove('hide');
+    finalScore.innerText = time;
+    clearInterval(timerId);
+ }
+  if (currentQuestionIndex === 5) {
+       quizEnd()
+ };
 
 
 start.addEventListener('click', function () {
@@ -93,7 +103,7 @@ start.addEventListener('click', function () {
     clockTick();
 
     console.log("timer");
-})
+});
 
 
 // Need to add event listener for start button
