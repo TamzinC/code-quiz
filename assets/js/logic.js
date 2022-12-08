@@ -6,16 +6,18 @@ var choices = document.querySelector('#choices');
 var feedback = document.querySelector('#feedback');
 var timer = document.querySelector('#time');
 var endScreen = document.querySelector('#end-screen');
+var finalScore = document.querySelector('#final-score');
 
 
-var intervalHandle
+var intervalHandle;
 var currentQuestionIndex = 0;
 var time = 60;
 var timerId;
 
 
-
+//this function will run when 'start quiz' button is clicked
 function displayQuestion() {
+    //this is checking for the questions array, once the end is reached it will trigger the end screen to display
     if (currentQuestionIndex === 5) {
 
         console.log("end screen")
@@ -27,10 +29,13 @@ function displayQuestion() {
 
     var currentQuestion = questions[currentQuestionIndex];
     console.log(currentQuestion);
+
+    //adding the question title to the question title element
     questionTitle.innerText = currentQuestion.title;
 
     choices.innerHTML = '';
 
+    //running a forEach loop which will add each choice as a button for each question
     currentQuestion.choices.forEach(function (choice) {
         var choicesButton = document.createElement('button');
         console.log(choice);
@@ -40,6 +45,7 @@ function displayQuestion() {
 
             console.log(currentQuestion.answer === choice);
 
+            //if statement used to determine which sound effect should be played upon user selection
             if (currentQuestion.answer === choice) {
 
                 feedback.innerText = 'Correct!';
@@ -68,20 +74,21 @@ function displayQuestion() {
 }
 
 
-
+//this function will also run as soon as 'start quiz' button is clicked
+//this will trigger the start of the countdown from 60sec on the questions screen
 function clockTick() {
     time--;
     console.log(time)
     timer.textContent = time
 
-    if (time === 0) { //timer stopping at 1 and not 0??!
-        quizEnd() 
+    if (time === 0 || currentQuestionIndex === 5) {
 
         clearInterval(timerId);
     }
 };
 
 
+//this function will run as soon as all questions have been completed, to display the end screen
 function quizEnd () {
     questionsScreen.classList.add('hide');
     endScreen.classList.remove('hide');
@@ -93,6 +100,8 @@ function quizEnd () {
  };
 
 
+
+//adding event listener for 'start quiz' button click
 start.addEventListener('click', function () {
     startScreen.classList.add('hide');
     endScreen.classList.add('hide')
