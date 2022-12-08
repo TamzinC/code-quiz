@@ -84,6 +84,7 @@ function clockTick() {
     if (time === 0 || currentQuestionIndex === 5) {
 
         clearInterval(timerId);
+        quizEnd();
     }
 };
 
@@ -92,12 +93,9 @@ function clockTick() {
 function quizEnd () {
     questionsScreen.classList.add('hide');
     endScreen.classList.remove('hide');
+    feedback.classList.add('hide');
     finalScore.innerText = time;
-    clearInterval(timerId);
  }
-  if (currentQuestionIndex === 5) {
-       quizEnd()
- };
 
 
 
