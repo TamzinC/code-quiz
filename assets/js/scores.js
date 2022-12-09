@@ -20,10 +20,11 @@ submit.addEventListener('click', function () {
     
     //this needs to be displayed upon load of highscores html page - separate event listener for this page?
     var scoreboard = document.createElement('li');
+    // var scoreboard = $(highscoresEl).createElement('li');
     var userValues = JSON.parse(localStorage.getItem('score'));
     console.log(userValues.score, userValues.initials)
     // scoreboard.innerText = JSON.parse(localStorage.getItem(['score'], ['initials']));
     scoreboard.innerText = userValues.score + " " + userValues.initials;
     document.querySelector('#end-screen').append(scoreboard);
 });
-    
+   
