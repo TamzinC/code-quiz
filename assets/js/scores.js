@@ -1,30 +1,27 @@
-// Need to use localStorage function to save score and initials of users
 
-var finalScore = document.querySelector('#final-score');
-var initials = document.querySelector('#initials');
-var submit = document.querySelector('#submit');
 var highscoresEl = document.querySelector('#highscores');
+var clearScores = document.querySelector('#clear');
 
 
-//creating an event listener for the submit button
-submit.addEventListener('click', function () {
-    //Saving the scores as an object of the score and initials element
-    var highscores = {
-        score: time,
-        initials: initials.value
-    }
-    console.log(highscores);
-    //saving the score and initials
-    localStorage.setItem('score', JSON.stringify(highscores));
-    
-    
-    //this needs to be displayed upon load of highscores html page - separate event listener for this page?
-    var scoreboard = document.createElement('li');
-    // var scoreboard = $(highscoresEl).createElement('li');
-    var userValues = JSON.parse(localStorage.getItem('score'));
-    console.log(userValues.score, userValues.initials)
-    // scoreboard.innerText = JSON.parse(localStorage.getItem(['score'], ['initials']));
-    scoreboard.innerText = userValues.score + " " + userValues.initials;
-    document.querySelector('#end-screen').append(scoreboard);
-});
-   
+//variable declared to create a new li element to display the users scores and initials
+var scoreboard = document.createElement('li');
+
+function generateLis() {
+    for (scoreboard = 0; scoreboard.length; scoreboard++) (
+
+        //retrieving user score and initials to localStorage
+        var userValues = JSON.parse(localStorage.getItem('score'));
+        console.log(userValues.score, userValues.initials)
+        
+        //adding the retrieved values as text to the li and appending to the ol element
+        scoreboard.innerText = userValues.score + " " + userValues.initials;
+        highscoresEl.append(scoreboard);
+    );
+}
+
+
+//adding event listener to trigger the scoreboard to be cleared from screen and localStorage
+clearScores.addEventListener('click', function() {
+    localStorage.removeItem('score');
+    highscoresEl.removeChild(scoreboard);
+})

@@ -7,12 +7,15 @@ var feedback = document.querySelector('#feedback');
 var timer = document.querySelector('#time');
 var endScreen = document.querySelector('#end-screen');
 var finalScore = document.querySelector('#final-score');
+var initials = document.querySelector('#initials');
+var submit = document.querySelector('#submit');
 
 
 var intervalHandle;
 var currentQuestionIndex = 0;
 var time = 60;
 var timerId;
+
 
 
 //this function will run when 'start quiz' button is clicked
@@ -61,7 +64,7 @@ function displayQuestion() {
                 function playIncorrectAudio() {
                     var incorrect = new Audio('./assets/sfx/incorrect.wav');
                     incorrect.play();
-                    timer.textContent = time - 10;
+                    timer.textContent = time -= 10;
                 }
                 playIncorrectAudio();
             }
@@ -110,6 +113,19 @@ start.addEventListener('click', function () {
     clockTick();
 
     console.log("timer");
+});
+
+//adding an event listener for the submit button
+submit.addEventListener('click', function () {
+    //Saving the scores as an object of the score and initials element
+    var highscores = {
+        score: time,
+        initials: initials.value
+    }
+    console.log(highscores);
+    //saving the score and initials
+    localStorage.setItem('score', JSON.stringify(highscores));
+    window.location.href = 'highscores.html'; 
 });
 
 
