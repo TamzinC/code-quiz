@@ -5,18 +5,18 @@ var clearScores = document.querySelector('#clear');
 
 //variable declared to create a new li element to display the users scores and initials
 var scoreboard = document.createElement('li');
+var userValues = JSON.parse(localStorage.getItem('score'));
 
 function generateLis() {
-    for (scoreboard = 0; scoreboard.length; scoreboard++) (
+    for (let i = 0; i < userValues.length; i++) {
 
         //retrieving user score and initials to localStorage
-        var userValues = JSON.parse(localStorage.getItem('score'));
         console.log(userValues.score, userValues.initials)
         
         //adding the retrieved values as text to the li and appending to the ol element
         scoreboard.innerText = userValues.score + " " + userValues.initials;
         highscoresEl.append(scoreboard);
-    );
+    };
 }
 
 
