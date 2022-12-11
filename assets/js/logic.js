@@ -115,27 +115,27 @@ start.addEventListener('click', function () {
     console.log("timer");
 });
 
+
+
 //adding an event listener for the submit button
 submit.addEventListener('click', function () {
     //Saving the scores as an object of the score and initials element
+    var scoreboard = JSON.parse(localStorage.getItem('score'));
+
+    if(Array.isArray(scoreboard)) {
+        console.log('found existing scoreboard!');
+    } else {
+        scoreboard = [];
+    }
+    
     var highscores = {
         score: time,
         initials: initials.value
-    }
+    };
     console.log(highscores);
+    scoreboard.push(highscores); 
     //saving the score and initials
-    localStorage.setItem('score', JSON.stringify(highscores));
+    localStorage.setItem('score', JSON.stringify(scoreboard));
     window.location.href = 'highscores.html'; 
 });
 
-
-// Need to add event listener for start button
-// hide class needs to be used to clear page and move onto next question
-// all choices need to be buttons!
-// answer selection needs to trigger the feedback div and play 'right'/'wrong' sound
-// same process for all questions!
-// timer starts at 60s, needs to be triggered upon clicking the start button
-// every wrong answer = -10s
-// quiz ends once all questions answered within time or if timer gets to 0 (score is the remaining time left)
-// user is prompted to enter initials at end to submit their scores
-// scores data needs to be stored using localStorage to be able to use in the highscore leaderboard
